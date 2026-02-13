@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router";
 
 function Landing() {
   // * REFS
@@ -7,8 +8,17 @@ function Landing() {
   const rightBtn = useRef(null);
 
   const [btn, setBtn] = useState(false);
+  let goTo = useNavigate();
 
-  // console.log(leftBtn);
+  const navigateTo = (e) => {
+    if (e.target.innerText === "Inscription") {
+      goTo("/signup");
+    }
+    if (e.target.innerText === "Connexion") {
+      goTo("/login");
+    }
+    console.log(e.target);
+  };
 
   useEffect(() => {
     elSelected.current.classList.add("startingImg");
@@ -42,6 +52,7 @@ function Landing() {
           onMouseOver={btnAnimation}
           onMouseOut={btnAnimation}
           className="btn-welcome"
+          onClick={navigateTo}
         >
           Inscription
         </button>
@@ -52,6 +63,7 @@ function Landing() {
           onMouseOver={btnAnimation}
           onMouseOut={btnAnimation}
           className="btn-welcome"
+          onClick={navigateTo}
         >
           Connexion
         </button>
